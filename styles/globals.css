@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#f0f2f5];
+  }
+}
+
+@layer components {
+  .icon_wrapper {
+    @apply bg-gray-300 w-[40px] h-[40px] rounded-full grid place-items-center;
+  }
+  .singleStory::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+    border-radius: 15px;
+  }
+  .scrollbarHide::-webkit-scrollbar {
+    display: none;
+  }
+}
+.webView {
+  visibility: visible;
+  height: 100%;
+}
+.mobileView {
+  visibility: hidden;
+  display: none;
+}
+
+@media screen and (max-width: 1024px) {
+  .webView {
+    visibility: hidden;
+    display: none;
+  }
+  .mobileView {
+    visibility: visible;
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+}
