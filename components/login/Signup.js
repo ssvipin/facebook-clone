@@ -12,7 +12,7 @@ const Signup = () => {
         "content-type": "application/json",
       },
     });
-    const data = res.json();
+    const data = await res.json();
     localStorage.setItem("token", data.token);
     router.push("/");
   };
