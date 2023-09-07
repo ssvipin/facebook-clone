@@ -1,22 +1,22 @@
-import Image from "next/image";
-import React, { useState } from "react";
+// import Image from "next/image";
+import React from "react";
 import Signup from "./Signup";
-import { useRouter } from "next/router";
-const Login = () => {
-  const [loginObj, setLoginObj] = useState({});
-  const router = useRouter();
-  const login = async () => {
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      body: JSON.stringify(loginObj),
-      headers: {
-        "content-type": "application/json",
-      },
-    });
-    const data = await res.json();
-    localStorage.setItem("token", data?.token);
-    router.push("/");
-  };
+// import { useRouter } from "next/router";
+const Login = ({ loginObj, setLoginObj, login }) => {
+  // const [loginObj, setLoginObj] = useState({});
+  // const router = useRouter();
+  // const login = async () => {
+  //   const res = await fetch("/api/auth/login", {
+  //     method: "POST",
+  //     body: JSON.stringify(loginObj),
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //   });
+  //   const data = await res.json();
+  //   localStorage.setItem("token", data?.token);
+  //   router.push("/");
+  // };
   return (
     <div className="h-full w-full">
       <div className="w-full bg-[#486b69] flex justify-between p-3 h-24">
@@ -27,7 +27,7 @@ const Login = () => {
             <input
               className="mt-1"
               type="text"
-              value={loginObj?.emailPhone}
+              value={loginObj?.email}
               onChange={(e) =>
                 setLoginObj({ ...loginObj, email: e?.target?.value })
               }
@@ -53,7 +53,7 @@ const Login = () => {
           </button>
         </div>
       </div>
-      <Signup />
+      <Signup isMobile={false} />
     </div>
   );
 };

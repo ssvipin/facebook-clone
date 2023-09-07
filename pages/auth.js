@@ -1,8 +1,23 @@
 import Head from "next/head";
-import WebLogin from "../components/login/WebLogin"
+import WebLogin from "../components/login/WebLogin";
 import MobileLogin from "../components/login/MobileLogin";
-
+import { useState } from "react";
+import { useRouter } from "next/router";
 export default function Home() {
+  const [loginObj, setLoginObj] = useState({});
+  const router = useRouter();
+  const login = async () => {
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      body: JSON.stringify(loginObj),
+      headers: {
+        "content-type": "application/json",
+      },
+    });
+    const data = await res.json();
+    localStorage.setItem("token", data?.token);
+    router.push("/");
+  };
   return (
     <>
       <Head>
@@ -18,10 +33,18 @@ export default function Home() {
         }}
       >
         <div className="webView">
-          <WebLogin />
+          <WebLogin
+            loginObj={loginObj}
+            setLoginObj={setLoginObj}
+            login={login}
+          />
         </div>
         <div className="mobileView">
-          <MobileLogin />
+          <MobileLogin
+            loginObj={loginObj}
+            setLoginObj={setLoginObj}
+            login={login}
+          />
         </div>
       </main>
     </>

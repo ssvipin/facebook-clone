@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-const Signup = () => {
+const Signup = ({ isMobile, setIsSignup }) => {
   const [signUpObj, setSignUpObj] = useState({});
   const router = useRouter();
   const signUp = async () => {
@@ -17,11 +17,13 @@ const Signup = () => {
     router.push("/");
   };
   return (
-    <div className="w-full flex">
-      <div className="w-2/4 flex justify-center items-center">
-        <Image src="/1.png" width={500} height={700} />
-      </div>
-      <div className="w-2/4 flex flex-col p-5">
+    <div className="w-[100%] flex">
+      {!isMobile && (
+        <div className="w-2/4 flex justify-center items-center">
+          <Image src="/1.png" width={500} height={700} />
+        </div>
+      )}
+      <div className="w-[100%] lg:w-2/4 flex flex-col p-5">
         <div className="flex flex-col">
           <h1 className="text-4xl">Create a New Account</h1>
           <h1 className="mt-2">It's free and always will be.</h1>
@@ -107,6 +109,25 @@ const Signup = () => {
         >
           SIGNUP
         </button>
+        {isMobile && (
+          <div>
+            <div className="flex mt-8  items-center h-12">
+              <div className={`w-[40%] border-t-2 border-white-500`}></div>
+              <p className={`mx-7  "text-[black]" `}>or you can</p>
+              <div
+                className={`${
+                  !isMobile ? "w-32" : "w-[40%]"
+                }  border-t-2 border-white-500`}
+              ></div>
+            </div>
+            <button
+              className="bg-white mt-12 h-10 rounded w-[100%]"
+              onClick={() => setIsSignup((prevState) => !prevState)}
+            >
+              LOGIN
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
